@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Reader Service</title>
+</head>
+<body>
+    <h1>File Reader Service</h1>
+    <input type="file" id="fileInput" accept=".html,.zip">
+    <button onclick="readFile()">Go</button>
+    <pre id="fileContent"></pre>
+
+    <script>
+        function readFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (file.type === 'text/html' || file.type === 'application/zip') {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById('fileContent').textContent = e.target.result;
+                };
+
+                reader.readAsText(file);
+            } else {
+                alert('Please upload an HTML or ZIP file.');
+            }
+        }
+    </script>
+</body>
+</html>
