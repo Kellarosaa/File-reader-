@@ -5,43 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Reader Service</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        input[type="file"] {
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        pre {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            white-space: pre-wrap;
-        }
-    </style>
 </head>
 <body>
     <h1>File Reader Service</h1>
-    <input type="file" id="fileInput" accept=".html,.zip">
+    <input type="file" id="fileInput">
     <button onclick="readFile()">Go</button>
     <pre id="fileContent"></pre>
 
@@ -49,19 +16,14 @@
         function readFile() {
             const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
-            if (file.type === 'text/html' || file.type === 'application/zip') {
-                const reader = new FileReader();
+            const reader = new FileReader();
 
-                reader.onload = function(e) {
-                    document.getElementById('fileContent').textContent = e.target.result;
-                };
+            reader.onload = function(e) {
+                document.getElementById('fileContent').textContent = e.target.result;
+            };
 
-                reader.readAsText(file);
-            } else {
-                alert('Please upload an HTML or ZIP file.');
-            }
+            reader.readAsText(file);
         }
     </script>
 </body>
 </html>
-
